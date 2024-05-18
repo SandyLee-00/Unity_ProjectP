@@ -2,17 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Define : MonoBehaviour
+/// <summary>
+/// 공통적으로 사용되는 상수들을 정의
+/// </summary>
+public class Define
 {
-    // Start is called before the first frame update
-    void Start()
+    public enum UIEvent
     {
-        
+        Click,
+        Pressed,
+        PointerDown,
+        PointerUp,
     }
 
-    // Update is called once per frame
-    void Update()
+    public enum Sound
     {
-        
+        Bgm,
+        Effect,
+        Max,
     }
 }
