@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// °øÅëÀûÀ¸·Î »ç¿ëµÇ´Â »ó¼öµéÀ» Á¤ÀÇ
+/// ê³µí†µì ìœ¼ë¡œ ì‚¬ìš©ë˜ëŠ” ìƒìˆ˜ë“¤ì„ ì •ì˜
 /// </summary>
 public class Define
 {
@@ -17,7 +17,7 @@ public class Define
 
     public enum Sound
     {
-        Bgm,
+        Bgm = 0,
         Effect,
         Max,
     }
