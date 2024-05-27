@@ -5,7 +5,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
-/// ¸ğµç ¸Å´ÏÀúµéÀ» °ü¸®ÇÏ´Â ½Ì±ÛÅæ Å¬·¡½º
+/// ëª¨ë“  ë§¤ë‹ˆì €ë“¤ì„ ê´€ë¦¬í•˜ëŠ” ì‹±ê¸€í†¤ í´ë˜ìŠ¤
+/// Sound
 /// </summary>
 public class Managers : MonoBehaviour
 {

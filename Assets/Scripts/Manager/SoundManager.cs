@@ -3,7 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundManager : MonoBehaviour
+/// <summary>
+/// 사운드 매니저
+/// </summary>  
+public class SoundManager
 {
     private GameObject _soundRoot = null;
 
