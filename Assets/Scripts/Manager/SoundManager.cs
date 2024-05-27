@@ -1,18 +1,25 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private GameObject _soundRoot = null;
 
-    // Update is called once per frame
-    void Update()
+    public void Init()
     {
-        
+        if (_soundRoot == null)
+        {
+            _soundRoot = GameObject.Find("@SoundRoot");
+
+            if (_soundRoot == null)
+            {
+                _soundRoot = new GameObject { name = "@SoundRoot" };
+                DontDestroyOnLoad(_soundRoot);
+
+                string[] soundTypeNames = System.Enum.GetNames(typeof(Define.Sound));
+            }
+        }
     }
 }
