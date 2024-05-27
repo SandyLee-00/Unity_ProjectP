@@ -6,7 +6,7 @@ using UnityEngine;
 
 /// <summary>
 /// 모든 매니저들을 관리하는 싱글톤 클래스
-/// Sound
+/// Sound / Game / Data
 /// </summary>
 public class Managers : MonoBehaviour
 {
@@ -14,8 +14,14 @@ public class Managers : MonoBehaviour
     public static Managers Instance { get { return s_instance; } }
 
     private static SoundManager s_soundManager = new SoundManager();
+    private static GameManager s_gameManager = new GameManager();
+    private static DataManager s_dataManager = new DataManager();
+
+
 
     public static SoundManager Sound { get { Init(); return s_soundManager; } }
+    public static GameManager Game { get { Init(); return s_gameManager; } }
+    public static DataManager Data { get { Init(); return s_dataManager; } }
 
     private static void Init()
     {
@@ -31,6 +37,7 @@ public class Managers : MonoBehaviour
             s_instance = go.GetOrAddComponent<Managers>();
             DontDestroyOnLoad(go);
 
+            // 매니저 초기화
             s_soundManager.Init();
 
             Application.targetFrameRate = 60;
