@@ -39,6 +39,7 @@ public class Managers : MonoBehaviour
 
             // 매니저 초기화
             s_soundManager.Init();
+            s_dataManager.Init();
 
             Application.targetFrameRate = 60;
         }

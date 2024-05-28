@@ -5,36 +5,40 @@ using System.IO;
 using UnityEngine;
 
 /// <summary>
-/// 인게임 데이터를 저장하는 클래스
 /// </summary>
 [Serializable]
 public class GameData
 {
     public string PlayerName;
-    public int Hp;
-    public int MaxHp;
     public int Money;
 }
 
 /// <summary>
-/// 실행되고 있는 게임에 대한 정보를 관리하는 클래스
 /// </summary>
 public class GameManager
 {
     public void Init()
     {
+        // TODO
+        SavedGameData.PlayerName = "Player";
+        SavedGameData.Money = 0;
     }
 
+    #region 스탯
+
+
+    #endregion
+
     #region 데이터 Save & Load	
-    public GameData SaveData { get; set; }
-    public string _path = Application.persistentDataPath + "/SaveData.json";
+    public GameData SavedGameData { get; set; }
+    public string _path = Application.persistentDataPath + "/SavedGameData.json";
 
     /// <summary>
     /// 플레이 한 내용 저장하기
     /// </summary>
     public void SaveGame()
     {
-        string jsonString = JsonUtility.ToJson(Managers.Game.SaveData);
+        string jsonString = JsonUtility.ToJson(Managers.Game.SavedGameData);
         File.WriteAllText(_path, jsonString);
         Debug.Log("GameManager::SaveGame()");
     }
@@ -56,11 +60,11 @@ public class GameManager
         GameData data = JsonUtility.FromJson<GameData>(fileString);
         if (data == null)
         {
-            Debug.LogError("GameManager::LoadGame() JsonUtility.FromJson<GameData> Failed");
+            Debug.LogError("GameManager::LoadGame() JsonUtility.FromJson<SavedGameData> Failed");
             return false;
         }
 
-        Managers.Game.SaveData = data;
+        Managers.Game.SavedGameData = data;
         Debug.Log("GameManager::LoadGame()");
         return true;
     }
