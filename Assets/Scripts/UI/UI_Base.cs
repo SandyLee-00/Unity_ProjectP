@@ -6,17 +6,10 @@ using UnityEngine.Diagnostics;
 using Unity.VisualScripting;
 
 /// <summary>
-/// ¸ğµç UI´Â UI_Base Å¬·¡½º¸¦ »ó¼Ó¹Ş¾Æ¾ß ÇÑ´Ù.
+/// ëª¨ë“  UIëŠ” UI_Base í´ë˜ìŠ¤ë¥¼ ìƒì†ë°›ì•„ì•¼ í•œë‹¤.
 /// </summary>
-public class UI_Base : MonoBehaviour
+public abstract class UI_Base : MonoBehaviour
 {
-    public static void BindEvent(GameObject _gameObject, Action action, Define.UIEvent type = Define.UIEvent.Click)
-    {
-        // UI_EventHandler evt = Utils.GetOrAddComponent<UI_EventHandler>(go);
-        UI_EventHandler evt = _gameObject.GetOrAddComponent<UI_EventHandler>();
-        
-
-
-    }
+    
 
 }

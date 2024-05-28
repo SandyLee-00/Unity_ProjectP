@@ -5,19 +5,17 @@ using UnityEngine.EventSystems;
 using System;
 
 /// <summary>
-/// UI �̺�Ʈ �ڵ鷯 Click, Pressed, PointerDown, PointerUp
+/// UI 이벤트 핸들러 Click, Pressed, PointerDown, PointerUp
 /// </summary>
 public class UI_EventHandler : MonoBehaviour, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler
 {
     public Action OnClickHandler = null;
-
     public Action OnPointerDownHandler = null;
-
-    bool _pressed = false;
     public Action OnPressedHandler = null;
-
     public Action OnPointerUpHandler = null;
 
+    bool _pressed = false;
+    
     public void OnPointerClick(PointerEventData eventData)
     {
         OnClickHandler?.Invoke();
@@ -32,7 +30,9 @@ public class UI_EventHandler : MonoBehaviour, IPointerClickHandler, IPointerDown
     private void Update()
     {
         if (_pressed)
+        {
             OnPressedHandler?.Invoke();
+        }
     }
 
     public void OnPointerUp(PointerEventData eventData)

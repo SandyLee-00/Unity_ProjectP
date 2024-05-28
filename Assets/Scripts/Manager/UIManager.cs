@@ -2,17 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+public class UIManager
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	int order = -20;
 
-    // Update is called once per frame
-    void Update()
+    public T MakeSubItem<T>(Transform parent = null, string name = null) where T : UI_Base
     {
-        
+
     }
 }
