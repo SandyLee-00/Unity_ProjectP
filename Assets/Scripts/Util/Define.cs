@@ -21,4 +21,11 @@ public class Define
         Effect,
         Max,
     }
+
+    public enum Scene
+    {
+        Unknown,
+        Title,
+        Game,
+    }
 }

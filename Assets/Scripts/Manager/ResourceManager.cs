@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 
-/// path 가지고 바로 Instantiate 하기
+/// Resource 관리
 /// </summary>
 public class ResourceManager
 {
@@ -38,7 +37,7 @@ public class ResourceManager
     }
 
     /// <summary>
-    /// Instantiate 할 때 Clone 이름 제거하기
+    /// Instantiate 할 때 Clone 이름 prefab 이름으로 바꾸기
     /// </summary>
     /// <param name="prefab"></param>
     /// <param name="parent"></param>
@@ -49,18 +48,4 @@ public class ResourceManager
         go.name = prefab.name;
         return go;
     }
-
-    /// <summary>
-    /// Destroy 할 때 Null 체크하고 LogError 남기기
-    /// </summary>
-    /// <param name="go"></param>
-    public void Destroy(GameObject go)
-    {
-        if (go == null)
-        {
-            Debug.LogError($"ResourceManager::Destroy() go is null");
-            return;
-        }
-    }
-
 }

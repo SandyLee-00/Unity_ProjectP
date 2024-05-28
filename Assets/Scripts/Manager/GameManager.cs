@@ -31,7 +31,7 @@ public class GameManager
 
     #region 데이터 Save & Load	
     public GameData SavedGameData { get; set; }
-    public string _path = Application.persistentDataPath + "/SavedGameData.json";
+    public string _path = Application.persistentDataPath + "/SaveData.json";
 
     /// <summary>
     /// 플레이 한 내용 저장하기

@@ -8,33 +8,33 @@ using UnityEngine;
 /// </summary>  
 public class SoundManager
 {
-    private GameObject _soundRoot = null;
-    private AudioSource[] _audioSources = new AudioSource[(int)Define.Sound.Max];
-    private Dictionary<string, AudioClip> _audioClips = new Dictionary<string, AudioClip>();
+    private GameObject soundManager = null;
+    private AudioSource[] audioSources = new AudioSource[(int)Define.Sound.Max];
+    private Dictionary<string, AudioClip> audioClips = new Dictionary<string, AudioClip>();
 
     /// <summary>
     /// 사운드 매니저 초기화
     /// </summary>
     public void Init()
     {
-        if (_soundRoot == null)
+        if (soundManager == null)
         {
-            _soundRoot = GameObject.Find("@SoundRoot");
+            soundManager = GameObject.Find("SoundManager");
 
-            if (_soundRoot == null)
+            if (soundManager == null)
             {
-                _soundRoot = new GameObject { name = "@SoundRoot" };
-                UnityEngine.Object.DontDestroyOnLoad(_soundRoot);
+                soundManager = new GameObject { name = "SoundManager" };
+                UnityEngine.Object.DontDestroyOnLoad(soundManager);
 
                 // BGM, Effect 등등 사운드 타입을 만들어준다.
                 string[] soundTypeNames = System.Enum.GetNames(typeof(Define.Sound));
                 for (int count = 0; count < soundTypeNames.Length - 1; count++)
                 {
                     GameObject go = new GameObject { name = soundTypeNames[count] };
-                    _audioSources[count] = go.AddComponent<AudioSource>();
-                    go.transform.parent = _soundRoot.transform;
+                    audioSources[count] = go.AddComponent<AudioSource>();
+                    go.transform.parent = soundManager.transform;
                 }
-                _audioSources[(int)Define.Sound.Bgm].loop = true;
+                audioSources[(int)Define.Sound.Bgm].loop = true;
             }
         }
     }
@@ -44,13 +44,12 @@ public class SoundManager
     /// </summary>
     public void Clear()
     {
-        foreach (AudioSource audioSource in _audioSources)
+        foreach (AudioSource audioSource in audioSources)
         {
             audioSource.Stop();
         }
-        _audioClips.Clear();
+        audioClips.Clear();
     }
-
 
     /// <summary>
     /// 사운드 채널에 맞게 사운드 재생 
@@ -73,7 +72,7 @@ public class SoundManager
             path = string.Format("Sound/{0}", path);
         }
 
-        AudioSource audioSource = _audioSources[(int)type];
+        AudioSource audioSource = audioSources[(int)type];
         audioSource.volume = volume;
         audioSource.pitch = pitch;
 
@@ -118,13 +117,13 @@ public class SoundManager
     private AudioClip GetAudioClip(string path)
     {
         AudioClip audioClip = null;
-        if (_audioClips.TryGetValue(path, out audioClip))
+        if (audioClips.TryGetValue(path, out audioClip))
         {
             return audioClip;
         }
 
         audioClip = Resources.Load<AudioClip>(path);
-        _audioClips.Add(path, audioClip);
+        audioClips.Add(path, audioClip);
         return audioClip;
     }
 }
