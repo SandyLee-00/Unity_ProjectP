@@ -4,7 +4,7 @@ public abstract class BaseScene : MonoBehaviour
 {
     public Define.Scene SceneType = Define.Scene.Unknown;
 
-    protected bool alreadyInit = false;
+    protected bool isInitalized = false;
 
     private void Start()
     {
@@ -13,12 +13,12 @@ public abstract class BaseScene : MonoBehaviour
 
     protected virtual bool Init()
     {
-        if (alreadyInit)
+        if (isInitalized)
         {
             return false;
         }
 
-        alreadyInit = true;
+        isInitalized = true;
 
         GameObject go = GameObject.Find("EventSystem");
         if (go == null)
