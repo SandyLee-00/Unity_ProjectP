@@ -22,14 +22,15 @@ public abstract class UI_Base : MonoBehaviour
         Init();
     }
 
-    public virtual void Init()
+    public virtual bool Init()
     {
         if (isInitalized)
         {
-            return;
+            return false;
         }
 
         isInitalized = true;
+        return true;
     }
 
     /// <summary>

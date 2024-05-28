@@ -18,6 +18,7 @@ public class Managers : MonoBehaviour
     private static DataManager s_dataManager = new DataManager();
     private static ResourceManager s_resourceManager = new ResourceManager();
     private static SceneManagerEx s_sceneManager = new SceneManagerEx();
+    private static UIManager s_uiManager = new UIManager();
 
 
     public static SoundManager Sound { get { Init(); return s_soundManager; } }
@@ -25,6 +26,7 @@ public class Managers : MonoBehaviour
     public static DataManager Data { get { Init(); return s_dataManager; } }
     public static ResourceManager Resource { get { Init(); return s_resourceManager; } }
     public static SceneManagerEx Scene { get { Init(); return s_sceneManager; } }
+    public static UIManager UI { get { Init(); return s_uiManager; } }
 
     private static void Init()
     {
@@ -40,9 +42,13 @@ public class Managers : MonoBehaviour
             s_instance = go.GetOrAddComponent<Managers>();
             DontDestroyOnLoad(go);
 
-            // 매니저 초기화
+            // 매니저 객체 만들어주기
             s_soundManager.Init();
+            s_uiManager.Init();
+
+            // 데이터 로드
             s_dataManager.Init();
+
 
             Application.targetFrameRate = 60;
         }

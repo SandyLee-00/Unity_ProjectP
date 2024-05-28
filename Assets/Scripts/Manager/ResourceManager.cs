@@ -27,7 +27,13 @@ public class ResourceManager
     /// <returns></returns>
     public GameObject Instantiate(string path, Transform parent = null)
     {
-        GameObject prefab = Resources.Load<GameObject>($"Prefabs/{path}");
+        // path에 Prefabs/ 붙여주기
+        if (path.Contains("Prefabs/") == false)
+        {
+            path = $"Prefabs/{path}";
+        }
+
+        GameObject prefab = Resources.Load<GameObject>($"{path}");
         if (prefab == null)
         {
             Debug.LogError($"ResourceManager::Instantiate() failed. path={path}");

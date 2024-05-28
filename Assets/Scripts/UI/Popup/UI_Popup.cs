@@ -2,17 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UI_Popup : MonoBehaviour
+/// <summary>
+/// 팝업 UI는 여기서 상속받아서 사용하기
+/// </summary>
+public class UI_Popup : UI_Base
 {
-    // Start is called before the first frame update
-    void Start()
+    public override bool Init()
     {
-        
-    }
+        if (base.Init() == false)
+        {
+            return false;
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
+        Managers.UI.CloseAllPopupUI();
+        Managers.UI.SetCanvas(gameObject, true);
         
+        return true;
     }
 }
