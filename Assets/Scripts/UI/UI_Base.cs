@@ -10,6 +10,7 @@ using UnityEngine.UI;
 
 /// <summary>
 /// 모든 UI는 UI_Base 클래스를 상속받아야 한다.
+/// 프리팹에 있는 자식 오브젝트 이름, Enum으로 바인딩을 해서 타입별로 dictionary에 저장한다.
 /// </summary>
 public abstract class UI_Base : MonoBehaviour
 {

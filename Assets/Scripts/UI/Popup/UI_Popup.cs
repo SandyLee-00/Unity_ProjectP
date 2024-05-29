@@ -14,7 +14,6 @@ public class UI_Popup : UI_Base
             return false;
         }
 
-        Managers.UI.CloseAllPopupUI();
         Managers.UI.SetCanvas(gameObject, true);
         
         return true;
