@@ -1,42 +1,33 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
 /// 사운드 매니저
+/// Bgm, Effect 사운드를 재생한다.
 /// </summary>  
-public class SoundManager
+public class SoundManager : Singleton<SoundManager>
 {
-    private GameObject soundManager = null;
-    private AudioSource[] audioSources = new AudioSource[(int)Define.Sound.Max];
-    private Dictionary<string, AudioClip> audioClips = new Dictionary<string, AudioClip>();
+    private AudioSource[] _audioSources = new AudioSource[(int)Define.Sound.Max];
+    private Dictionary<string, AudioClip> _audioClips = new Dictionary<string, AudioClip>();
 
-    /// <summary>
-    /// 사운드 매니저 초기화
-    /// </summary>
-    public void Init()
+    private void Awake()
     {
-        if (soundManager == null)
+        if (_componentInstance == null)
         {
-            soundManager = GameObject.Find("SoundManager");
-
-            if (soundManager == null)
-            {
-                soundManager = new GameObject { name = "SoundManager" };
-                UnityEngine.Object.DontDestroyOnLoad(soundManager);
-
-                // BGM, Effect 등등 사운드 타입을 만들어준다.
-                string[] soundTypeNames = System.Enum.GetNames(typeof(Define.Sound));
-                for (int count = 0; count < soundTypeNames.Length - 1; count++)
-                {
-                    GameObject go = new GameObject { name = soundTypeNames[count] };
-                    audioSources[count] = go.AddComponent<AudioSource>();
-                    go.transform.parent = soundManager.transform;
-                }
-                audioSources[(int)Define.Sound.Bgm].loop = true;
-            }
+            _componentInstance = SoundManager.Instance;
         }
+
+        // BGM, Effect 등등 사운드 타입을 만들어준다.
+        string[] soundTypeNames = System.Enum.GetNames(typeof(Define.Sound));
+        for (int count = 0; count < soundTypeNames.Length - 1; count++)
+        {
+            GameObject go = new GameObject { name = soundTypeNames[count] };
+            _audioSources[count] = go.AddComponent<AudioSource>();
+            go.transform.parent = _componentInstance.transform;
+        }
+        _audioSources[(int)Define.Sound.Bgm].loop = true;
     }
 
     /// <summary>
@@ -44,11 +35,26 @@ public class SoundManager
     /// </summary>
     public void Clear()
     {
-        foreach (AudioSource audioSource in audioSources)
+        foreach (AudioSource audioSource in _audioSources)
         {
             audioSource.Stop();
         }
-        audioClips.Clear();
+        _audioClips.Clear();
+    }
+
+    /// <summary>
+    /// 사운드 채널에 맞게 볼륨 설정
+    /// </summary>
+    /// <param name="type"></param>
+    /// <param name="volume"></param>
+    public void SetVolume(Define.Sound type, float volume)
+    {
+        _audioSources[(int)type].volume = volume;
+    }
+
+    public float GetVolume(Define.Sound type)
+    {
+        return _audioSources[(int)type].volume;
     }
 
     /// <summary>
@@ -59,7 +65,7 @@ public class SoundManager
     /// <param name="volume"></param>
     /// <param name="pitch"></param>
     /// <returns></returns>
-    public bool Play(Define.Sound type, string path, float volume = 1.0f, float pitch = 1.0f)
+    public bool Play(Define.Sound type, string path, float pitch = 1.0f)
     {
         if (string.IsNullOrEmpty(path))
         {
@@ -72,8 +78,7 @@ public class SoundManager
             path = string.Format("Sound/{0}", path);
         }
 
-        AudioSource audioSource = audioSources[(int)type];
-        audioSource.volume = volume;
+        AudioSource audioSource = _audioSources[(int)type];
         audioSource.pitch = pitch;
 
         if (type == Define.Sound.Bgm)
@@ -117,13 +122,13 @@ public class SoundManager
     private AudioClip GetAudioClip(string path)
     {
         AudioClip audioClip = null;
-        if (audioClips.TryGetValue(path, out audioClip))
+        if (_audioClips.TryGetValue(path, out audioClip))
         {
             return audioClip;
         }
 
         audioClip = Resources.Load<AudioClip>(path);
-        audioClips.Add(path, audioClip);
+        _audioClips.Add(path, audioClip);
         return audioClip;
     }
 }

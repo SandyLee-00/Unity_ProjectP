@@ -13,7 +13,6 @@ public class Managers : MonoBehaviour
     public static Managers s_instance = null;
     public static Managers Instance { get { return s_instance; } }
 
-    private static SoundManager s_soundManager = new SoundManager();
     private static GameManager s_gameManager = new GameManager();
     private static DataManager s_dataManager = new DataManager();
     private static ResourceManager s_resourceManager = new ResourceManager();
@@ -21,7 +20,6 @@ public class Managers : MonoBehaviour
     private static UIManager s_uiManager = new UIManager();
 
 
-    public static SoundManager Sound { get { Init(); return s_soundManager; } }
     public static GameManager Game { get { Init(); return s_gameManager; } }
     public static DataManager Data { get { Init(); return s_dataManager; } }
     public static ResourceManager Resource { get { Init(); return s_resourceManager; } }
@@ -43,7 +41,6 @@ public class Managers : MonoBehaviour
             DontDestroyOnLoad(go);
 
             // 매니저 객체 만들어주기
-            s_soundManager.Init();
             s_uiManager.Init();
 
             // 데이터 로드

@@ -24,8 +24,15 @@ public class Define
 
     public enum Scene
     {
-        Unknown,
-        Title,
-        Game,
+        Unknown = -1,
+        Title = 0,
+        Play,
+        Max,
     }
+
+    public const string GroundTag = "Ground";
+    public const string PlayerTag = "Player";
+    public const string InventoryTag = "Inventory";
+
+    public const string GroundLayer = "Ground";
 }
